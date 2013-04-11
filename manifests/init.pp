@@ -11,12 +11,10 @@ define rpm_gpgkey($path, $keyid) {
     $realpath = $path
   }
 
-  if is_string($keyid) {
-    $realkeyid = downcase($keyid)
-  }
-  else {
-    $realkeyid = $keyid
-  }
+  # quote keyid to explicitly stringify it, as hiera will return an
+  # integer if the hexadecimal number includes only digits 0-9. downcase()
+  # doesn't know what to do with an integer.
+  $realkeyid = downcase("${keyid}")
 
   exec { "rpm-gpg-import-${name}":
     command => "/bin/rpm --import ${realpath}",
