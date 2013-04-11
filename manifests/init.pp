@@ -11,7 +11,12 @@ define rpm_gpgkey($path, $keyid) {
     $realpath = $path
   }
 
-  $realkeyid = downcase($keyid)
+  if is_string($keyid) {
+    $realkeyid = downcase($keyid)
+  }
+  else {
+    $realkeyid = $keyid
+  }
 
   exec { "rpm-gpg-import-${name}":
     command => "/bin/rpm --import ${realpath}",
