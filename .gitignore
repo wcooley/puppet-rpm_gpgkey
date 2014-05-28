@@ -1,0 +1,9 @@
+# Ignore fixtures
+/spec/fixtures/*
+
+*/.DS_Store
+
+# Editor temp files
+.*.swp
+*~
+\#*\#
