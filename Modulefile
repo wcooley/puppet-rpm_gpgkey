@@ -1,4 +1,4 @@
-name    'puppet-rpm_gpgkey'
+name    'wcooley-rpm_gpgkey'
 version '0.1.0'
 author 'wcooley'
 license 'Apache License, Version 2.0'
