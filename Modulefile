@@ -1,0 +1,7 @@
+name    'puppet-rpm_gpgkey'
+version '0.1.0'
+author 'wcooley'
+license 'Apache License, Version 2.0'
+summary 'Puppet defined type to install RPM GPG keys'
+description 'Puppet defined type to install RPM GPG keys'
+project_page 'https://github.com/wcooley/puppet-rpm_gpgkey'
