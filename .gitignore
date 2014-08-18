@@ -1,5 +1,7 @@
 # Ignore fixtures
 /spec/fixtures/*
+# Ignore temporary package files
+/pkg
 
 */.DS_Store
 
