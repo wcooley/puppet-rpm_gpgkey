@@ -28,7 +28,7 @@ define rpm_gpgkey($path, $keyid) {
   if $path =~ /^(f|ht)tps?:/ {
     # If remote URL for key, just try to do it
     exec { "rpm-gpg-import-${name}":
-      command => "/bin/rpm --import ${realpath}",
+      command => "/bin/rpm --import ${path}",
       unless  => "/bin/rpm --quiet -q gpg-pubkey-${realkeyid}",
     }
   } else {
