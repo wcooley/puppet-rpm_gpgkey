@@ -20,9 +20,6 @@
 #   Key ID as string.
 #
 define rpm_gpgkey($path, $keyid) {
-  if $path =~ /^(f|ht)tps?:/ {
-    fail('rpm_gpgkey does not work with remote paths!')
-  }
 
   if $path !~ /^\// {
     $realpath = "/etc/pki/rpm-gpg/${path}"
@@ -36,10 +33,17 @@ define rpm_gpgkey($path, $keyid) {
   # doesn't know what to do with an integer.
   $realkeyid = downcase("${keyid}")
 
-  exec { "rpm-gpg-import-${name}":
-    command => "/bin/rpm --import ${realpath}",
-    unless  => "/bin/rpm --quiet -q gpg-pubkey-${realkeyid}",
-    onlyif  => "/usr/bin/test -f ${realpath}",
+  if $path =~ /^(f|ht)tps?:/ {
+    exec { "rpm-gpg-import-${name}":
+      command => "/bin/rpm --import ${realpath}",
+      unless  => "/bin/rpm --quiet -q gpg-pubkey-${realkeyid}",
+    }
+  } else {
+    exec { "rpm-gpg-import-${name}":
+      command => "/bin/rpm --import ${realpath}",
+      unless  => "/bin/rpm --quiet -q gpg-pubkey-${realkeyid}",
+      onlyif  => "/usr/bin/test -f ${realpath}",
+    }
   }
 }
 #
